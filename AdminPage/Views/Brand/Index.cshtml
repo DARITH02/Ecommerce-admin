@@ -1,0 +1,179 @@
+﻿@model IEnumerable<AdminPage.Models.Brand>
+@{
+
+}
+
+
+
+<nav class="container-fluid border-bottom shadow-lg py-3 px-5">
+    <span class="fs-2 fw-bold d-flex justify-content-center w-100 text-uppercase">
+        Breand
+    </span>
+</nav>
+<nav class="container-fluid bg-light shadow-sm">
+<div class="container">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between py-3 align-items-center">
+            <div class="">
+                    <button type="button" class="btn btn-primary text-uppercase fw-bold text-white" data-bs-toggle="modal" data-bs-target="#add_brand">Create <i class="bi bi-plus fw-bold "></i></button>
+                    <button class="btn btn-primary" id="export">Export </button>
+            </div>
+            <div class="w-25">
+              @*    <form action="/" method="post">
+                     <div class="input-group w-100">
+                         <select class="form-select w-25" >
+                             <option hidden>choos</option>
+                         </select>
+                         <input type="text" class="form-control py-2 px-3  w-50" id="floatingInputGroup2" placeholder="Username">
+                         <button type="submit" class="input-group-text w-auto btn btn-primary py-1  px-3">
+                             <i class="fa-solid fa-magnifying-glass"></i>
+                         </button>
+                     </div>
+                 </form> *@
+            </div>
+        </div>
+    </div>
+</div>
+</nav>
+
+
+
+<nav class="container-fluid mt-3">
+    <table class="table table-striped table-hover text-center" id="tblData">
+        <thead class="text-uppercase">
+            <tr>
+                <th scope="col">#</th>
+                <th>Products Name</th>
+                <th scope="col">IMAGE</th>
+                <th scope="col">DESCRIPTIONaslfosadlfjklsadf</th>
+                <th scope="col">ACTION</th>
+            </tr>
+        </thead>
+        <tbody id="tbl_brand" style=""></tbody>
+        
+    
+    </table>
+    
+</nav>
+<div class="modal fade" id="add_brand" tabindex="-1" aria-labelledby="add_cate" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h1 class="modal-title fs-5" id="add_cate">New message</h1>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+                 <form class="row g-3" id="frm_add_brand" enctype="multipart/form-data">
+                     <div class="col-md-6">
+                         <label for="" class="form-label">Brand Name</label>
+                        <input type="text" class="form-control" id="Brand_name" name="Brand_name" placeholder="input breand name....">
+                     </div>
+                     <div class="col-md-12">
+                         <label for="" class="form-label">Description</label>
+                        <textarea class="form-control" id="Brand_description"  name="Brand_description" placeholder="Description here...." rows="3">NUll</textarea>
+                     </div>
+                     <div class="col-md-12">
+                         <label class="form-label">Image of Brand</label>
+                            <label class="col-9 m-auto d-block" for="breviewBrand">
+                             <input type="file" hidden class="form-control" id="breviewBrand" name="img">
+                            <img class="img-fluid object-fit-cover w-100" style="height:220px" src="" id="img-brand" alt="" />
+                             </label>
+                             <input name="Img_name" id="Img_name"/>
+                     </div>
+                   
+                 </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" onclick="insertBrand()" class="btn btn-primary text-uppercase text-white">save</button>
+                </div>
+             </div>
+         </div>
+     </div>
+ </div>
+@* 
+   <nav class="container-fluid mt-3">
+       <table class="table">
+           <thead>
+               <tr>
+                   <th scope="col">#</th>
+                   <th scope="col">Products Name</th>
+                   <th scope="col">IMAGE</th>
+                   <th scope="col">DESCRIPTION</th>
+                   <th scope="col">ACTION</th>
+               </tr>
+           </thead>
+           <tbody class="table-group-divider">
+               @foreach(var item in Model)
+               {
+               <tr>
+                       <th scope="row">@item.Id</th>
+                   
+                   <td>
+                         @Html.DisplayFor(modelItem => item.Brand_name)
+                   </td>
+                       <td>
+                   @Html.DisplayFor(modelItem => item.Brand_description)
+                   </td>
+                   <td>
+                   <img class="object-fit-cover" style="width:50px;height:50px;" src="~/images/20250106134302brand.webp" alt="Alternate Text" />
+                   </td>
+                   <td>
+                       <button type="button" class="btn btn-success" onclick="update_brand(@item.Id)" data-bs-toggle="modal" data-bs-target="#update_brand">Edit</button>
+                       <button type="button" class="btn btn-danger" onclick="deleteBrand(@item.Id)">Danger</button>
+                   </td>
+               </tr>
+               }
+           </tbody>
+       </table>
+   </nav>  
+   *@
+@* //modal *@
+
+
+<!-- Modal -->
+<div class="modal fade" id="update_brand" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form  id="frm_update" class="needs-validation was-validated px-3" novalidate enctype="multipart/form-data">
+                   <input name="Id" id="Id" type="hidden" />
+                    <input type="hidden" name="Create_at" id="create" />
+                      <div class="row">
+                           <label>Brand Name</label>
+                        <input name="Brand_name" id="Name" class="form-control" type="text" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Please brand name
+                            </div>
+                       </div>
+                    <div class="row my-4">
+                        <label>Description</label>
+                        <textarea name="Brand_description" id="Desc" class="form-control" rows="5" placeholder="" required></textarea>
+                        <div class="invalid-feedback">
+                            Please Description
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Image of Brand</label>
+                        <label class="col-9 m-auto d-block p-3 shadow-lg" style="cursor:pointer" for="breviewBrand">
+                            <input type="file" hidden class="form-control" id="breviewBrand" name="img">
+                            <img class="img-fluid object-fit-cover w-100 imgOldPreview" style="height:220px" src="" id="img-brand" alt="" />
+                        </label>
+                        <input name="Img_name" id="ImgNew" hidden />
+
+                        <input type="text" name="ImgOld" id="imgOld" hidden value="" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="update()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+

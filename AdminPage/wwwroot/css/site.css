@@ -1,0 +1,49 @@
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+html {
+    font-size: 14px;
+    font-family: "Montserrat", serif;
+}
+                                                                                                        
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+*::before::after{
+    margin:0;
+    padding:0;
+}
+ul>li,ul{
+    list-style-type:none;
+        padding:0;
+        margin:0;
+}
+a{
+    text-decoration:none;
+    color:black;
+}
+.txt-corlor-side-bar {
+    color: #E5E5E5;
+    display:block
+}
+.txt-corlor-side-bar:hover {
+    color: white;                                                                          
+}
+.list-bar > ul > li:hover > a {
+    background-color: #10204d;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.dataTables_info {
+    display: none;
+}

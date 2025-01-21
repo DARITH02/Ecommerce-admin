@@ -1,0 +1,330 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+<nav class="container-fluid border-bottom shadow-lg py-3 px-5">
+    <span class="fw-bold text-center text-success d-block text-uppercase" style="font-size:20px">
+        Products Page
+    </span>
+</nav>
+<nav class="container-fluid bg-light shadow-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-between py-3 align-items-center">
+                <div class="">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDetail">
+                        Add New
+                    </button>
+                    <button class="btn btn-primary" id="export">Print</button>
+                </div>
+                <div class="w-25">
+                    <form action="/" method="post">
+                        <div class="input-group w-100">
+                            <select class="form-select w-25">
+                                <option hidden>choos</option>
+                            </select>
+                            <input type="text" class="form-control py-2 px-3  w-50" id="floatingInputGroup2" placeholder="Username">
+                            <button type="submit" class="input-group-text w-auto btn btn-primary py-1 px-3">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<nav class="container-fluid mt-3">
+    <table class="table" id="tblData" style="font-size:12px">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product</th>
+                <th scope="col">Discount</th>
+                <th scope="col">Colors</th>
+                <th scope="col">Ram</th>
+                <th scope="col">Storage</th>
+                <th scope="col">Camera</th>
+                <th scope="col">Bettery</th>
+                <th scope="col">Display</th>
+                <th scope="col">processor</th>
+                <th scope="col">Port</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="" id="tbl_detailPc">
+        </tbody>
+    </table>
+</nav>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="addDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog   modal-lg modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-2">
+                <form class="row g-3 p-4" id="frmInsertPc">
+
+                        <div class="row">
+                            <div class="col-6">
+                        <label for="" class="form-label">Products Name</label>
+                            <select name="ProId" class="form-select">
+                            <option hidden>--select product--</option>
+                            @{
+                                foreach (var pro in ViewBag.ProName)
+                                {
+                                    <option value="@pro.Id">@pro.Pro_name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="inputAddress" class="form-label">Colors</label>
+                        <select name="Color" class="form-select">
+                            <option>--Choose colers--</option>
+                            <option value="Red">Red</option>
+                            <option value="Red">Blue</option>
+                            <option value="Red">Black</option>
+                            <option value="Red">Whith</option>
+                        </select>
+                    </div>
+                    </div>
+
+                    <div class="row">
+                    <div class="col-6">
+                        <label for="" class="form-label"> Ram</label>
+                        <input type="text" class="form-control" name="Ram" id="" placeholder="enter ram 6g..">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputCity" class="form-label">Storage</label>
+                        <input type="text" class="form-control" id="" name="Rom" placeholder="enter rom 256gb...">
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-6">
+                        <label for="" class="form-label">Desplay</label>
+                            <input type="text" name="Display" class="form-control" placeholder="17.3 FHD ...." />
+                    </div>
+                    <div class="col-6">
+                        <label for="" class="form-label">Battery</label>
+                            <input type="text" class="form-control" name="Battery" id="" placeholder="70.5...">
+                    </div>
+                    </div>
+                     <div class="row">
+                         <div class="col-6">
+                             <label>Graphic</label>
+                            <input type="text" class="form-control" name="Graphic" placeholder="NVIDIA® GeForce®..." />
+                         </div>
+                         <div class="col-6">
+                             <label>Keyboard</label>
+                            <input type="text" name="Keyboard" class="form-control" placeholder="Single-zone RGB Powered..." />
+                         </div>
+                     </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Webcam</label>
+                            <input type="text" class="form-control" name="Webcam" placeholder="Built-in HD webcam (1MP / 720P)" />
+                        </div>
+                        <div class="col-6">
+                            <label>Connectivity</label>
+                            <input type="text" name="Connectivity" class="form-control" placeholder="Wi-Fi 802.11a/b/g/n/ac..." />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>InterfacePort</label>
+                            <input type="text" class="form-control" name="InterfacePort" placeholder="B1 x HDMI 3 x Type-A USB 3.2, 1 x Thunderbolt 3...." />
+                        </div>
+                        <div class="col-6">
+                            <label>Speaker</label>
+                            <input type="text" name="Speaker" class="form-control" placeholder="Built-in Stereo speakers, 7.1 ..." />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Weight</label>
+                            <input type="text" class="form-control" name="Weight" placeholder="2.75kg with battery ...." />
+                        </div>
+                        <div class="col-6">
+                            <label>
+                                Processor
+                            </label>
+                            <input type="text" name="Processor" class="form-control" placeholder="" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>OS</label>
+                            <input type="text" class="form-control" name="Os" placeholder="Window 10 Home License 64Bit..." />
+                        </div>
+                        <div class="col-6">
+                            <label>Code</label>
+                            <input type="text" name="Code" class="form-control" placeholder="LA001(5)..." />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Discounts</label>
+                            <select name="Dis">
+                                <option hidden>--Choose Discount--</option>
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                                <option value="20">20%</option>
+                            
+                            </select>
+                        </div>
+                    </div>
+                    </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="insertPc()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@* updata *@
+
+
+<div class="modal fade" id="edite_pc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog   modal-lg modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-2">
+                <form class="row g-3 p-4" id="frmUpdatePc">
+                    <input id="Create" name="CreateAt" />
+                    <input id="pcId" name="PcId" />
+
+
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="" class="form-label">Products Name</label>
+                            <select name="ProId" id="ProId" class="form-select">
+                                <option hidden>--select product--</option>
+                                @{
+                                    foreach (var pro in ViewBag.ProName)
+                                    {
+                                        <option value="@pro.Id">@pro.Pro_name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="color" class="form-label">Colors</label>
+                            <select name="Color" id="Color" class="form-select">
+                                <option>--Choose colers--</option>
+                                <option value="Red">Red</option>
+                                <option value="Blue">Blue</option>
+                                <option value="Black">Black</option>
+                                <option value="White">White</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="Ram" class="form-label">Ram</label>
+                            <input type="text" class="form-control" name="Ram" id="Ram" placeholder="enter ram 6g..">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Rom" class="form-label">Storage</label>
+                            <input type="text" class="form-control" name="Rom" id="Rom" placeholder="enter rom 256gb...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="Display" class="form-label">Display</label>
+                            <input type="text" name="Display" id="Display" class="form-control" placeholder="17.3 FHD ...." />
+                        </div>
+                        <div class="col-6">
+                            <label for="Battery" class="form-label">Battery</label>
+                            <input type="text" class="form-control" name="Battery" id="Battery" placeholder="70.5...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="Graphic" class="form-label">Graphic</label>
+                            <input type="text" class="form-control" name="Graphic" id="Graphic" placeholder="NVIDIA® GeForce®..." />
+                        </div>
+                        <div class="col-6">
+                            <label for="Keyboard" class="form-label">Keyboard</label>
+                            <input type="text" name="Keyboard" id="Keyboard" class="form-control" placeholder="Single-zone RGB Powered..." />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="Webcam" class="form-label">Webcam</label>
+                            <input type="text" class="form-control" name="Webcam" id="Webcam" placeholder="Built-in HD webcam (1MP / 720P)" />
+                        </div>
+                        <div class="col-6">
+                            <label for="Connectivity" class="form-label">Connectivity</label>
+                            <input type="text" name="Connectivity" id="Connectivity" class="form-control" placeholder="Wi-Fi 802.11a/b/g/n/ac..." />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="InterfacePort" class="form-label">InterfacePort</label>
+                            <input type="text" class="form-control" name="InterfacePort" id="InterfacePort" placeholder="1 x HDMI 3 x Type-A USB 3.2, 1 x Thunderbolt 3...." />
+                        </div>
+                        <div class="col-6">
+                            <label for="Speaker" class="form-label">Speaker</label>
+                            <input type="text" name="Speaker" id="Speaker" class="form-control" placeholder="Built-in Stereo speakers, 7.1 ..." />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="Weight" class="form-label">Weight</label>
+                            <input type="text" class="form-control" name="Weight" id="Weight" placeholder="2.75kg with battery ...." />
+                        </div>
+                        <div class="col-6">
+                            <label for="Processor" class="form-label">Processor</label>
+                            <input type="text" name="Processor" id="Processor" class="form-control" placeholder="" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="Os" class="form-label">OS</label>
+                            <input type="text" class="form-control" name="Os" id="Os" placeholder="Window 10 Home License 64Bit..." />
+                        </div>
+                        <div class="col-6">
+                            <label for="Code" class="form-label">Code</label>
+                            <input type="text" name="Code" id="Code" class="form-control" placeholder="LA001(5)..." />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="Dis" class="form-label">Discounts</label>
+                            <select name="Dis" id="Dis" class="form-select">
+                                <option hidden>--Choose Discount--</option>
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                                <option value="20">20%</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="updateDetailPc()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<AdminPage.Models.Categories>
+
+<div class="container shadow-sm">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between py-3 align-items-center">
+            <div class="">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_cate">Create</button>
+                <button class="btn btn-primary" id="export">Export</button>
+            </div>
+            <h2 class="text-uppercase text-primary">Category page</h2>
+            <div class="w-25">
+               
+            </div>
+        </div>
+    </div>
+</div>
+    
+<nav class="container mt-3 m-auto">
+    <table class="table table-bordered table-striped table-hover" id="tblData">
+            <thead>
+                <tr>
+                    <th scope="col" style="">#</th>
+                    <th scope="col">Categories Name</th>
+                <th scope="col" style="width:20%">Action</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider align-middle">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoriesName)
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#edite_cate" onclick="edite_cate(@item.Id)">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="delete_cate(@item.Id)">Danger</button>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+</nav>
+
+@* Modal Insert  *@
+
+<div class="modal fade" id="add_cate" tabindex="-1" aria-labelledby="add_cate" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-uppercase" id="add_cate ">create new category</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frm_add_cate" >
+                    <dicv class="row px-3">
+                    <div class="col-12">
+                       <label>Category</label>
+                        <input type="text" class="form-control mt-2" name="CategoriesName" placeholder="enter your category..." />
+                    </div>
+                    </dicv>
+                </form>
+                 
+            </div>  
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary text-uppercase text-white" onclick="insert_cate()">save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* update modal *@
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="edite_cate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content mod">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="update_cate" class="needs-validation was-validated" novalidate>
+                    <input type="text" id="id" name="Id" value="" />
+                    <div class="position-relative px-2">
+                   <label>Category Name</label>
+                        <input name="CategoriesName" type="text" id="up_cate" class="form-control my-2" value=""  />
+                      
+                        <div class="invalid-tooltip">
+                            Please Input category name!
+                        </div>
+                    </div>
+               </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="update_cate()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

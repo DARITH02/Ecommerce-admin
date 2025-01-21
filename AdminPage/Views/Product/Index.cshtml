@@ -1,0 +1,277 @@
+﻿@model AdminPage.Models.Products
+
+
+<nav class="container-fluid border-bottom shadow-lg py-3 px-5">
+    <span class="fw-bold text-center text-success d-block text-uppercase" style="font-size:20px">
+      Products Page
+    </span>
+</nav>
+<nav class="container-fluid bg-light shadow-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-between py-3 align-items-center">
+                <div class="">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_pro">
+                       Add New
+                    </button>
+                    <button class="btn btn-primary" id="export">Print</button>
+                </div>
+                <div class="w-25">
+                    <form action="/" method="post">
+                        <div class="input-group w-100">
+                            <select class="form-select w-25">
+                                <option hidden>choos</option>
+                            </select>
+                            <input type="text" class="form-control py-2 px-3  w-50" id="floatingInputGroup2" placeholder="Username">
+                            <button type="submit" class="input-group-text w-auto btn btn-primary py-1 px-3">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="modal fade" id="add_cate" tabindex="-1" aria-labelledby="add_cate" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="add_cate">New message</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" asp-action="">
+                    <div class="col-md-6">
+                        <label for="" class="form-label">Brand Name</label>
+                        <select name="" id="">
+                            <option>
+                                Apple
+                            </option>
+
+                        </select>
+                        <input type="text" class="form-control" id="" placeholder="input breand name....">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="" class="form-label">Description</label>
+                        <textarea class="form-control" id="" placeholder="Description here...." rows="3"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Image of Brand</label>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                            <input type="file" class="form-control" id="inputGroupFile01">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <img class="img-fluid object-fit-cover w-100" style="height:300px" src="" id="img-averta" alt="" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary text-uppercase text-white">save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<nav class="container-fluid mt-3">
+    <table class="table" id="tblData">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">QTY</th>
+                <th scope="col">Prices</th>
+                <th scope="col">Categories</th>
+                <th scope="col">Brands</th>
+                <th scope="col">Images</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider" id="tbl_products">
+         
+      
+        </tbody>
+    </table>
+</nav>
+
+
+
+ @* insert brands *@
+
+<div class="modal fade" id="add_pro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+           <form id="frm_products" class="px-5" enctype="multipart/form-data">
+               <div class="row my-3">
+                   <div class="col-12">
+                       <label>Product Name</label>
+                       <input type="text"  name="Pro_name" class="form-control" value="" />
+                   </div>
+               </div>
+               <div class="row my-3">
+                   <div class="col-6">
+                       <label>Quantities</label>
+                            <select name="Invetory" id="Invetory" class="form-select">
+                       <option hidden >
+                           --Select Quantities--
+                       </option>
+                                @foreach (var qty in ViewBag.Inventory)
+                                {    
+                                <option value="@qty.Id">
+                                  @qty.Qty
+                                </option>
+                                }
+                   </select>
+                   </div>
+                        <div class="col-6">
+                            <label>Products code</label>
+                            <input class="form-control" type="text" name="ProductsCode" placeholder="enter product code..." />
+                        </div>
+               </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Category</label>
+                            <select name="Cate_id" id="" class="form-select" style="cursor: pointer;">
+                                <option hidden >--Select Category--</option>
+                                @foreach (var cate in ViewBag.cate)
+                                {
+                                    <option value="@cate.Id">@cate.CategoriesName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label>Brand Name</label>
+                            <select name="Brand_id" id="" class="form-select" style="cursor: pointer;">
+                                <option hidden>--Select Brands--</option>
+                                @foreach (var brand in ViewBag.Brands)
+                                {
+                                    <option value="@brand.Id">@brand.Brand_name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+               <div class="row my-3">
+                    <div class="col-6">
+                        <label>Prices</label>
+                        <input type="text" class="form-control" name="Prices" value="" />
+                    </div>
+               </div>
+            
+                <div class="row my-3">
+                    <label>Upload Image</label>
+                    <div class="col-10 m-auto" style="height:200px">
+                        <label for="imgUpload" class="w-100 h-100 d-flex justify-content-center align-content-center ">
+                        <input hidden type="file" id="imgUpload" onchange="previewImage()" name="ImgFile" />
+                         <img class="w-100 h-100 object-fit-cover rounded-3 img-preview" src="https://i.pinimg.com/736x/8f/8e/e6/8f8ee69f8f6c7527cfce103607118a7a.jpg" alt="" />
+                        </label>
+                            <input type="text" name="ImgName" id="img_name" class="img_name" />
+                    </div>
+                  </div>
+           </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="inserProducts()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+ @* Edite data *@
+
+
+
+
+<div class="modal fade" id="edite_pro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="update_pro" class="px-5" enctype="multipart/form-data">
+                    <input type="text" name="Id" id="idUp" />
+                    <div class="row my-3">
+                        <div class="col-12">
+                            <label>Product Name</label>
+                            <input type="text" name="Pro_name" id="pro_name" class="form-control" value="" />
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col-6">
+                            <label>Quantity</label>
+                            <select name="Invetory" id="qty" class="form-select">
+                           
+                            @foreach (var qty in ViewBag.Inventory)
+                            {
+                                <option value="@qty.Id">
+                                    @qty.Qty
+                                </option>
+                            }
+                      </select>
+                        </div>
+                        <div class="col-6">
+                                <label>Products code</label>
+                                <input class="form-control" type="text" name="ProductsCode" id="code" placeholder="enter product code..." />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Category</label>
+                            <select name="Cate_id" id="cate" class="form-select" style="cursor: pointer;">
+                              
+                                @foreach (var cate in ViewBag.cate)
+                                {
+                                    <option value="@cate.Id">@cate.CategoriesName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label>Brand Name</label>
+                            <select name="Brand_id" id="brand" class="form-select" style="cursor: pointer;">
+                               
+                                @foreach (var brand in ViewBag.Brands)
+                                {
+                                    <option value="@brand.Id">@brand.Brand_name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+
+                        <label>Prices</label>
+                        <input type="text" class="form-control" name="Prices" id="price" value="" />
+                         </div>
+                     </div>
+                    <div class="row my-3">
+                        <label>Upload Image</label>
+                        <div class="col-10 m-auto" style="height:200px">
+                            <label for="imgUpload" class="w-100 h-100 d-flex justify-content-center align-content-center ">
+                                <input hidden type="file" id="imgUpload" onchange="previewImage()" name="ImgFile" />
+                                <img class="w-100 h-100 object-fit-cover rounded-3 img-preview" src="https://i.pinimg.com/736x/8f/8e/e6/8f8ee69f8f6c7527cfce103607118a7a.jpg" alt="" />
+                            </label>
+                            <input type="text" name="ImgName" id="img_old" />
+                            <input type="text" name="ImgNameUp" id="img_name" class="img_name" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="updatePro()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

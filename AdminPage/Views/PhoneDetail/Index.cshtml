@@ -1,0 +1,275 @@
+﻿@model AdminPage.Models.DetailPhone
+
+@{
+    ViewData["Title"] = "DetailPhone";
+}
+
+<nav class="container-fluid border-bottom shadow-lg py-3 px-5">
+    <span class="text-center text-uppercase text-success fw-bold d-block" style="font-size:20px">
+      Detail Phone page
+    </span>
+</nav>
+<nav class="container-fluid bg-light shadow-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-between py-3 align-items-center">
+                <div class="">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_detail">
+                        Add New
+                    </button>
+                    <button class="btn btn-primary" id="export">Export</button>
+                </div>
+                <div class="col-4">
+                    <form action="/" method="post" id="search">
+                        <div class="input-group" id="">
+                            <select class="form-select w-25" id="searchBrand" name="Brand">
+                                <option hidden>Brands</option>
+                                @foreach (var brand in ViewBag.brand)
+                                {
+                                    <option value="@brand.Brand_name">@brand.Brand_name</option>
+                                }
+                            </select>
+                     
+                            <input type="text" name="ProName" class="form-control py-2 px-3  w-50" id="floatingInputGroup2" placeholder="Productsname">
+                            <button onclick="search()" type="button" class="input-group-text w-auto btn btn-primary py-1  px-3">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+ @* <div class="modal fade" id="add_cate" tabindex="-1" aria-labelledby="add_cate" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h1 class="modal-title fs-5" id="add_cate">New message</h1>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+                 <form class="row g-3" asp-action="">
+                     <div class="col-md-6">
+                         <label for="" class="form-label">Brand Name</label>
+                         <select name="" id="">
+                             <option>
+                                 Apple
+                             </option>
+
+                         </select>
+                         <input type="text" class="form-control" id="" placeholder="input breand name....">
+                     </div>
+                     <div class="col-md-12">
+                         <label for="" class="form-label">Description</label>
+                         <textarea class="form-control" id="" placeholder="Description here...." rows="3"></textarea>
+                     </div>
+                     <div class="col-md-12">
+                         <label class="form-label">Image of Brand</label>
+                         <div class="input-group mb-3">
+                             <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                             <input type="file" class="form-control" id="inputGroupFile01">
+                         </div>
+                     </div>
+                     <div class="col-12">
+                         <img class="img-fluid object-fit-cover w-100" style="height:300px" src="" id="img-averta" alt="" />
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                         <button type="submit" class="btn btn-primary text-uppercase text-white">save</button>
+                     </div>
+                 </form>
+             </div>
+         </div>
+     </div>
+ </div> *@
+<nav class="container-fluid mt-3">
+    <table class="table" id="tblData">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Discount</th>
+                <th scope="col">Colors</th>
+                <th scope="col">Ram</th>
+                <th scope="col">Storage</th>
+                <th scope="col">Camera</th>
+                <th scope="col">Bettery</th>
+                <th scope="col">Display</th>
+                <th scope="col">Create</th>
+                <th scope="col">Update</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="" id="tbl_detailPhone">
+        </tbody>
+    </table>
+</nav>
+
+
+
+@* insert new detail phone *@
+
+<div class="modal fade" id="add_detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row" id="frm_info">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Products Name</label>
+                            <select class="form-select" name="ProId" >
+                                <option>--select products--</option>
+                                @foreach (var proId in ViewBag.ProductsId)
+                                {
+                                    <option value="@proId.Id">@proId.Pro_name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label>Color Products</label>
+                            <select name="Color"  class="form-select">
+                                <option hidden>--select Color--</option>
+                                <option value="Black">Black</option>
+                                <option value="Gold">Gold</option>
+                                <option value="White">Whith</option>
+                                <option value="Red">Red</option>
+                                <option value="Blue">Blue</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-6">
+                        <label for="" class="form-label">Ram</label>
+                        <input type="text" class="form-control" min="1"="2" required name="Ram"  placeholder="enter ram..">
+                    </div>
+                    <div class="col-6">
+                        <label for="" class="form-label">Storage</label>
+                        <input type="text" class="form-control"="4" name="Rom" placeholder="enter storage">
+                    </div>
+                    </div>
+                    <div class="row my-3">
+                    <div class="col-6">
+                        <label for="=" class="form-label">Camera</label>
+                            <input type="text"="3" required class="form-control" name="Camera" placeholder="enter camera resolution....">
+                    </div>
+                        <div class="col-6">
+                            <label for="inputCity" class="form-label">Display</label>
+                            <input type="text"="2" required class="form-control" name="Display" placeholder="enter display....">
+                        </div>
+                    </div>
+                   
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Discount</label>
+                            <select name="Discount"  class="form-select">
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label>Bettery</label>
+                            <input type="text"="4" required class="form-control" name="Bettery" placeholder="enter bettery power...">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addInfoPhone()">SaveInfo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* update detail phone *@
+
+<div class="modal fade" id="edite_detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row" id="frm_upinfo">
+                    <input type="text" name="Id" id="id" value="" />
+                    <input type="text" name="CreateAt" id="create" value="" />
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Products Name</label>
+                            <select class="form-select" name="ProId" id="ProId">
+                                <option  hidden>--select products--</option>
+                                @foreach (var proId in ViewBag.ProductsId)
+                                {
+                                    <option value="@proId.Id">@proId.Pro_name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label>Color Products</label>
+                            <select name="Color" id="Color" class="form-select">
+                                <option hidden>--select Color--</option>
+                                <option value="Black">Black</option>
+                                <option value="Gold">Gold</option>
+                                <option value="White">Whith</option>
+                                <option value="Red">Red</option>
+                                <option value="Blue">Blue</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="" class="form-label">Ram</label>
+                            <input type="text" class="form-control" required name="Ram" id="Ram" placeholder="enter ram..">
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">Storage</label>
+                            <input type="text" class="form-control" name="Rom" id="Rom" placeholder="enter storage">
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col-6">
+                            <label for="=" class="form-label">Camera</label>
+                            <input type="text" required class="form-control" name="Camera" id="Camera" placeholder="enter camera resolution....">
+                        </div>
+                        <div class="col-6">
+                            <label for="inputCity" class="form-label">Display</label>
+                            <input type="text" required class="form-control" name="Display" id="Display" placeholder="enter display....">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Discount</label>
+                            <select name="Discount" id="Dis" class="form-select">
+                                <option hidden>--discount--</option>
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label>Bettery</label>
+                            <input type="text" required class="form-control" name="Bettery" id="Bettery" placeholder="enter bettery power...">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="updateInfoPhone()">SaveInfo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
